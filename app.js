@@ -12,6 +12,22 @@ const searchTemp = () => {
     e.preventDefault();
   });
 };
+const initialDisplay = () => {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=Dhaka&appid=${API_KEY}&units=metric`;
+
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      const setInnerText = (id, text) => {
+        document.getElementById(id).innerHTML = text;
+      };
+
+      setInnerText("city-name", data.name);
+      setInnerText("temp", data.main.temp);
+      setInnerText("clouds", data.weather[0].main);
+    });
+};
+initialDisplay();
 
 const setInnerText = (id, text) => {
   document.getElementById(id).innerHTML = text;
